@@ -1,0 +1,77 @@
+version: '3.4'
+
+services:
+  ncb.apigateway:
+    image: ncb/apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/NCB.ApiGateway/Dockerfile
+    ports:
+      - '9999:80'
+      - '9998:443'
+    networks:
+      - netcorebase.net
+    depends_on:
+      - db
+      - rabbitmq
+      - ncb.identity.api
+      - ncb.catalog.api
+
+  ncb.identity.api:
+    image: ncb/identityapi
+    build:
+      context: .
+      dockerfile: Services/Identity/NCB.Identity.Api/Dockerfile
+    ports:
+      - '1111:80'
+      - '1112:443'
+    networks:
+      - netcorebase.net
+    depends_on:
+      - db
+      - rabbitmq
+
+  ncb.catalog.api:
+    image: ncb/catalogapi
+    build:
+      context: .
+      dockerfile: Services/Catalog/NCB.Catalog.Api/Dockerfile
+    ports:
+      - '2222:80'
+      - '2223:443'
+    networks:
+      - netcorebase.net
+    depends_on:
+      - db
+      - rabbitmq
+
+  db:
+    image: microsoft/mssql-server-linux:2017-latest
+    ports:
+      - '1434:1433'
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    volumes:
+      - sqldata:/var/opt/mssql/data
+    networks:
+      - netcorebase.net
+
+  rabbitmq:
+    image: rabbitmq:3.7-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest 
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    networks:
+      - netcorebase.net
+
+networks:
+  netcorebase.net:
+    driver: bridge
+
+volumes:
+  sqldata:
+  bitnami:
