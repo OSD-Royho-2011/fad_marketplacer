@@ -1,0 +1,57 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/catalogs/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ncb.catalog.api",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/api/catalogs/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Post", "Delete" ],
+      "DangerousAcceptAnyServerCertificateValidator": true, //development allow https
+      "SwaggerKey": "catalogs"
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ncb.identity.api",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/api/identity/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Post", "Delete" ],
+      "DangerousAcceptAnyServerCertificateValidator": true, //development
+      "SwaggerKey": "identity"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "catalogs",
+      "Config": [
+        {
+          "Name": "catalogs API",
+          "Version": "v1",
+          "Url": "http://ncb.catalog.api:80/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "identity",
+      "Config": [
+        {
+          "Name": "identity API",
+          "Version": "v1",
+          "Url": "http://ncb.identity.api:80/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    
+  }
+}

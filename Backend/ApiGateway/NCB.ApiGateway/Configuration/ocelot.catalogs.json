@@ -1,0 +1,17 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ncb.catalog.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/catalogs/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Post", "Delete" ],
+      "SwaggerKey": "catalogs"
+    }
+  ]
+}

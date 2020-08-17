@@ -1,0 +1,17 @@
+﻿{
+  "SwaggerEndPoints": [
+    {
+      "Key": "catalogs",
+      "Config": [
+        {
+          "Name": "Catalogs API",
+          "Version": "v1",
+          "Service": {
+            "Name": "catalogs",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    }
+  ]
+}
