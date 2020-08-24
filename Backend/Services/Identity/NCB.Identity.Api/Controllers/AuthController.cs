@@ -98,6 +98,14 @@ namespace NCB.Identity.Api.Controllers
 
             _eventBus.Publish("product_saled", event1);
 
+            var event2 = new CitySaledEvent()
+            {
+                Name = "City test",
+                Zipcode = 1001
+            };
+
+            _eventBus.Publish("city_saled", event2);
+
             _logger.LogInformation("public event");
 
             await Task.CompletedTask;

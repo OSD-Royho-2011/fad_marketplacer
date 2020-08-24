@@ -27,6 +27,22 @@
       "UpstreamHttpMethod": [ "Get", "Put", "Post", "Delete" ],
       "DangerousAcceptAnyServerCertificateValidator": true, //development
       "SwaggerKey": "identity"
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ncb.store.api",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/store/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Post", "Delete" ],
+      "DangerousAcceptAnyServerCertificateValidator": true, //development
+      "DelegatingHandlers": [
+        "GraphQlDelegatingHandler"
+      ]
     }
   ],
   "SwaggerEndPoints": [
