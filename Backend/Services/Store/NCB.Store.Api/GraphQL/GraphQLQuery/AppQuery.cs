@@ -15,9 +15,9 @@ namespace NCB.Store.Api.GraphQL.GraphQLQuery
     {
         public AppQuery(IBaseRepository<City> cityRepository)
         {
-            Field<ListGraphType<CityType>>(
+            FieldAsync<ListGraphType<CityType>>(
                 "cities",
-                resolve: context => cityRepository.GetAll().Where(x => !x.RecordDeleted).ToListAsync()
+                resolve: async context => await cityRepository.GetAll().Where(x => !x.RecordDeleted).ToListAsync()
                 );
         }
     }

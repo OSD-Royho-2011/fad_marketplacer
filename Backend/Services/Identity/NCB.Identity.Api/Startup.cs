@@ -122,6 +122,7 @@ namespace NCB.Identity.Api
 
             RunMigration(app);
             Init(context);
+            ConfigureEventBus(app);
         }
 
         //auto run migration
@@ -136,6 +137,12 @@ namespace NCB.Identity.Api
         private void Init(IdentityDbContext context)
         {
             new IdentityDbSeed(context).SeedAsync().Wait();
+        }
+
+        private void ConfigureEventBus(IApplicationBuilder app)
+        {
+
+            app.ApplicationServices.GetRequiredService<IEventBus>();
         }
     }
 }

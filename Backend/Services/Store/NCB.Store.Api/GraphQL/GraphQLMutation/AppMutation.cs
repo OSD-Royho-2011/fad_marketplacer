@@ -16,16 +16,16 @@ namespace NCB.Store.Api.GraphQL.GraphQLMutation
     {
         public AppMutation(IBaseRepository<City> cityRepository, IUnitOfWork unitOfWork)
         {
-            Field<CityType>(
+            FieldAsync<CityType>(
                "createCity",
                arguments: new QueryArguments(
                    new QueryArgument<NonNullGraphType<CityInputType>> { Name = "city" }),
-               resolve: context =>
+               resolve: async context =>
                {
                    var city = context.GetArgument<City>("city");
                    cityRepository.InsertAsync(city);
-                   cityRepository.SaveAsync();
-                   return cityRepository.GetAll().Where(x => !x.RecordDeleted && x.Id == city.Id).FirstOrDefaultAsync();
+                   await unitOfWork.SaveAsync();
+                   return await cityRepository.GetAll().Where(x => !x.RecordDeleted && x.Id == city.Id).FirstOrDefaultAsync();
                });
         }
     }

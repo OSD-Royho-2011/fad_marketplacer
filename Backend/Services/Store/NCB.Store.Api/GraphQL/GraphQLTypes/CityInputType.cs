@@ -12,7 +12,7 @@ namespace NCB.Store.Api.GraphQL.GraphQLTypes
         {
             Name = "CityInput";
             Field<NonNullGraphType<StringGraphType>>("name");
-            Field<NonNullGraphType<StringGraphType>>("zipcode");
+            Field<NonNullGraphType<IntGraphType>>("zipcode");
         }
     }
 }
