@@ -1,0 +1,17 @@
+default: &default
+  adapter: sqlserver
+  host: localhost
+  username: sa
+  password: Pass@word
+
+development:
+  <<: *default
+  database: dev_db
+  
+test:
+  <<: *default
+  database: test_db
+
+production:
+  <<: *default
+  database: production_db
